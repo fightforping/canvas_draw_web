@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Drawing App</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <header>
+        繪圖板
+    </header>
+
+    <div class="controls">
+        <div>
+            <label for="brush-size">筆刷大小:</label>
+            <input type="range" id="brush-size" min="1" max="20" value="5">
+        </div>
+        <div>
+            <label for="brush-color">筆刷顏色:</label>
+            <input type="color" id="brush-color" value="#7fffd4">
+        </div>
+        <div>
+            <label for="point-color">點的顏色:</label>
+            <input type="color" id="point-color" value="#FF0000">
+        </div>
+        <div>
+            <label for="point-distance">點的距離:</label>
+            <input type="range" id="point-distance" min="5" max="30" value="10">
+        </div>
+        <div>
+            <button id="upload-btn">輸入</button>
+            <button id="save-btn">輸出</button>
+            <button id="undo-btn">復原</button>
+            <button id="clear-btn">清除</button>
+        </div>
+        <div>
+            <label for="point-toggle">線上有點:</label>
+            <input type="checkbox" id="point-toggle">
+        </div>
+    </div>
+
+    <canvas id="drawing-canvas"></canvas>
+
+   <!-- Link to external JavaScript file -->
+   <script src="main.js"></script>
+</body>
+</html>
