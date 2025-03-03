@@ -223,13 +223,18 @@ canvas {
         // Stop drawing and render the final line with the selected colors
         function stopDrawing() {
             drawing = false;
-            undoStack.push(canvas.toDataURL());
+            if (tempDrawing.length > 0) {
+                // Capture the current canvas state after drawing
+                undoStack.push(canvas.toDataURL());
+            }
+            
+            // If not point-based, draw the final line in the selected color
             if (!isPointBased) {
-                // If not point-based, draw the final line in the selected color
                 drawFinalLine();
             }
             tempDrawing = []; // Clear temporary drawing data
         }
+
 
         // Draw the final line in the selected brush color
         function drawFinalLine() {
@@ -269,16 +274,20 @@ canvas {
 
         // Undo functionality
         undoBtn.addEventListener('click', () => {
-            if (undoStack.length > 0) {
-                const lastState = undoStack.pop();
+            if (undoStack.length > 1) {  // Ensure there's at least one previous state
+                undoStack.pop(); // Remove the current state (most recent one)
+                const lastState = undoStack[undoStack.length - 1]; // Get the previous state
                 const img = new Image();
                 img.src = lastState;
                 img.onload = () => {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     ctx.drawImage(img, 0, 0);
                 };
+            } else {
+                console.log('No more actions to undo.');
             }
         });
+
 
         // File upload functionality
         uploadBtn.addEventListener('click', () => {
